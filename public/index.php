@@ -89,14 +89,15 @@ $pageStyles = ['/assets/css/books.css'];
                             <p class="detail-badge"><?= htmlspecialchars($book['category'] ?? 'Uncategorized', ENT_QUOTES, 'UTF-8'); ?></p>
                             <h3 class="book-title"><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
                             <p class="book-meta">By <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
-
-                            <form class="cart-action" method="post" action="/cart.php">
-                                <input type="hidden" name="action" value="add">
-                                <input type="hidden" name="book_id" value="<?= (int) $book['id']; ?>">
-                                <input type="hidden" name="quantity" value="1">
-                                <button class="add-button" type="submit">Add to cart</button>
-                            </form>
+                            <div class="book-actions">
+                                <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
+                                <form class="cart-action" method="post" action="/cart.php">
+                                    <input type="hidden" name="action" value="add">
+                                    <input type="hidden" name="book_id" value="<?= (int) $book['id']; ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button class="add-button" type="submit">Add to cart</button>
+                                </form>
+                            </div>
                         </div>
                     </article>
                 <?php endforeach; ?>

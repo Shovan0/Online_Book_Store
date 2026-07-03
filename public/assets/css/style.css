@@ -1,25 +1,28 @@
-* {
-    box-sizing: border-box;
-}
-
 :root {
     color-scheme: light;
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    color: #111827;
-    background: #f8fafc;
-    --bg-surface: #ffffff;
-    --bg-muted: #f8fafc;
-    --border: #e5e7eb;
-    --text-muted: #64748b;
-    --text-strong: #111827;
-    --primary: #4338ca;
-    --primary-hover: #3730a3;
-    --success: #16a34a;
-    --danger: #dc2626;
-    --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+    color: #2f2a24;
+    background: #f5efe8;
+    --bg-surface: #fffdf9;
+    --bg-muted: #f5efe8;
+    --bg-panel: #f7f0e8;
+    --border: rgba(100, 72, 43, 0.16);
+    --text-muted: #7d7265;
+    --text-strong: #2f2a24;
+    --primary: #7f4f24;
+    --primary-hover: #6c4220;
+    --accent: #c49a6c;
+    --accent-soft: #f4e6d5;
+    --success: #3b6b4f;
+    --danger: #a33a2f;
+    --shadow: 0 24px 80px rgba(47, 42, 34, 0.1);
     --radius: 24px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 html {
@@ -29,7 +32,8 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+    background: radial-gradient(circle at top left, rgba(196, 154, 108, 0.12), transparent 26%),
+        linear-gradient(180deg, #fcf5eb 0%, #f5ede5 55%, #f5efe8 100%);
     color: var(--text-strong);
 }
 
@@ -48,7 +52,7 @@ img {
 .page-shell {
     width: min(1160px, 100%);
     margin: 0 auto;
-    padding: 32px 24px 48px;
+    padding: 36px 24px 52px;
 }
 
 .site-header,
@@ -63,30 +67,34 @@ img {
 .site-brand .brand-link {
     color: var(--text-strong);
     text-decoration: none;
-    font-weight: 800;
-    font-size: 1.2rem;
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: 0.02em;
 }
 
 .site-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 18px;
 }
 
 .nav-link {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
+    padding: 10px 12px;
+    border-radius: 999px;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
     color: var(--primary);
+    background: rgba(127, 79, 36, 0.08);
 }
 
 .site-footer {
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    border-top: 1px solid rgba(47, 42, 34, 0.08);
     padding-top: 24px;
     color: var(--text-muted);
     font-size: 0.95rem;
@@ -107,7 +115,7 @@ img {
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    padding: 14px 22px;
+    padding: 14px 24px;
     border: none;
     cursor: pointer;
     text-decoration: none;
@@ -120,6 +128,7 @@ img {
 .checkout-button {
     background: var(--primary);
     color: #ffffff;
+    box-shadow: 0 16px 30px rgba(127, 79, 36, 0.16);
 }
 
 .button:hover,
@@ -131,13 +140,13 @@ img {
 
 .secondary-button,
 .filter-button {
-    background: rgba(67, 56, 202, 0.08);
+    background: rgba(127, 79, 36, 0.08);
     color: var(--primary);
 }
 
 .secondary-button:hover,
 .filter-button:hover {
-    background: rgba(67, 56, 202, 0.16);
+    background: rgba(127, 79, 36, 0.14);
 }
 
 .form-card,
@@ -177,9 +186,9 @@ img {
 .textarea-field {
     width: 100%;
     padding: 14px 16px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(100, 72, 43, 0.18);
     border-radius: 16px;
-    background: #f9fafb;
+    background: #fcf7f0;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -188,8 +197,8 @@ img {
 .textarea-field:focus,
 .quantity-input:focus {
     outline: none;
-    border-color: rgba(67, 56, 202, 0.6);
-    box-shadow: 0 0 0 4px rgba(67, 56, 202, 0.08);
+    border-color: rgba(127, 79, 36, 0.45);
+    box-shadow: 0 0 0 4px rgba(196, 154, 108, 0.14);
     background: #ffffff;
 }
 
@@ -210,7 +219,7 @@ img {
     justify-content: center;
     border-radius: 999px;
     padding: 8px 16px;
-    background: #eef2ff;
+    background: var(--accent-soft);
     color: var(--primary);
     font-weight: 700;
     font-size: 0.92rem;
@@ -245,18 +254,18 @@ img {
     max-width: 360px;
     padding: 16px 18px;
     border-radius: 18px;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(47, 42, 34, 0.95);
     color: #ffffff;
     box-shadow: var(--shadow);
     animation: toast-slide 0.3s ease;
 }
 
 .toast.success {
-    background: #16a34a;
+    background: #3b6b4f;
 }
 
 .toast.error {
-    background: #dc2626;
+    background: #a33a2f;
 }
 
 @keyframes toast-slide {
@@ -273,7 +282,7 @@ img {
 .loading-mask {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.35);
+    background: rgba(47, 42, 34, 0.35);
     display: grid;
     place-items: center;
     z-index: 1200;

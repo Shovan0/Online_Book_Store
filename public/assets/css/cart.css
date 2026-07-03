@@ -4,20 +4,21 @@
 
 :root {
     font-family: 'Inter', system-ui, sans-serif;
-    background: #f8fafc;
-    color: #111827;
+    background: #f3e8d8;
+    color: #2e281f;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+    background: radial-gradient(circle at top left, rgba(201, 155, 103, 0.14), transparent 28%),
+        linear-gradient(180deg, #fbf3e7 0%, #f3e5d3 100%);
 }
 
 .page-shell {
     width: min(1160px, 100%);
     margin: 0 auto;
-    padding: 32px 24px 48px;
+    padding: 36px 24px 52px;
 }
 
 .site-header,
@@ -26,12 +27,6 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 24px 0;
-}
-
-.site-nav {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
 }
 
 .page-heading {
@@ -50,23 +45,23 @@ body {
 .cart-table {
     width: 100%;
     border-collapse: collapse;
-    background: #ffffff;
-    border-radius: 24px;
+    background: #fff7ef;
+    border-radius: 28px;
     overflow: hidden;
-    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 26px 80px rgba(46, 36, 28, 0.1);
 }
 
 .cart-table th,
 .cart-table td {
-    padding: 18px 20px;
+    padding: 20px 24px;
     text-align: left;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid rgba(112, 88, 61, 0.14);
 }
 
 .cart-table th {
-    background: #f8fafc;
-    color: #475569;
-    font-weight: 600;
+    background: rgba(143, 91, 43, 0.08);
+    color: #6f5f50;
+    font-weight: 700;
 }
 
 .cart-table tbody tr:last-child td {
@@ -85,12 +80,13 @@ body {
     height: 124px;
     object-fit: cover;
     border-radius: 18px;
-    background: #f3f4f6;
+    background: #f4e5d3;
 }
 
 .cart-title {
-    margin: 0 0 6px;
+    margin: 0 0 8px;
     font-size: 1rem;
+    color: #2e281f;
 }
 
 .cart-author,
@@ -98,20 +94,21 @@ body {
 .cart-price,
 .cart-stock {
     margin: 0;
-    color: #64748b;
+    color: #7d6c5e;
     font-size: 0.95rem;
 }
 
 .quantity-input {
     width: 96px;
-    border-radius: 14px;
-    border: 1px solid #d1d5db;
+    border-radius: 16px;
+    border: 1px solid rgba(112, 88, 61, 0.18);
     padding: 12px 14px;
+    background: #fbf2e5;
 }
 
 .quantity-form {
     display: inline-flex;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -124,44 +121,45 @@ body {
     border-radius: 14px;
     border: none;
     cursor: pointer;
-    padding: 12px 20px;
-    font-weight: 600;
+    padding: 12px 22px;
+    font-weight: 700;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .remove-button {
-    background: #f8fafc;
-    color: #475569;
+    background: rgba(143, 91, 43, 0.08);
+    color: #6f5f50;
 }
 
 .remove-button:hover {
-    background: #e2e8f0;
+    background: rgba(143, 91, 43, 0.16);
 }
 
 .empty-button {
-    background: #ef4444;
+    background: #d1613e;
     color: #ffffff;
 }
 
 .empty-button:hover {
-    background: #dc2626;
+    background: #b84e2f;
 }
 
 .checkout-button {
-    background: #4338ca;
+    background: #8f5b2b;
     color: #ffffff;
 }
 
 .checkout-button:hover {
-    background: #3730a3;
+    background: #7c4f24;
 }
 
 .cart-summary {
-    margin-top: 28px;
-    padding: 26px;
-    border-radius: 24px;
-    background: #ffffff;
-    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+    margin-top: 30px;
+    padding: 28px;
+    border-radius: 26px;
+    background: #fff6ee;
+    box-shadow: 0 26px 80px rgba(46, 36, 28, 0.1);
+    border: 1px solid rgba(112, 88, 61, 0.14);
 }
 
 .summary-row {
@@ -173,31 +171,32 @@ body {
 }
 
 .summary-row.total {
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.2rem;
 }
 
 .empty-state {
     padding: 34px;
-    border-radius: 24px;
-    background: #ffffff;
+    border-radius: 26px;
+    background: #fff8f2;
     text-align: center;
-    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 26px 80px rgba(46, 36, 28, 0.1);
+    border: 1px solid rgba(112, 88, 61, 0.14);
 }
 
 .empty-state p {
-    margin: 0 0 16px;
-    color: #475569;
+    margin: 0 0 18px;
+    color: #7d6c5e;
 }
 
 .empty-state a {
     display: inline-flex;
-    padding: 12px 22px;
+    padding: 12px 24px;
     border-radius: 14px;
-    background: #4338ca;
+    background: #8f5b2b;
     color: #ffffff;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 @media (max-width: 920px) {
