@@ -1,0 +1,1 @@
+This folder contains database and environment configuration classes for App\Config.

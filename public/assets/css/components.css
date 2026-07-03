@@ -1,0 +1,28 @@
+.page-heading h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 2.8vw, 2.4rem);
+}
+
+.card-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.card {
+    padding: 24px;
+}
+
+.form-card {
+    padding: 24px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.list-card {
+    display: grid;
+    gap: 18px;
+}

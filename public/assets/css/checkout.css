@@ -1,0 +1,265 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #111827;
+    background: #f8fafc;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+}
+
+.page-shell {
+    width: min(1160px, 100%);
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+}
+
+.site-header,
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
+.checkout-form-shell,
+.order-summary-shell {
+    border-radius: 28px;
+    background: #ffffff;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+    padding: 32px;
+}
+
+.checkout-form-shell h1,
+.checkout-page-head h1 {
+    margin: 0 0 14px;
+    font-size: 2rem;
+}
+
+.checkout-copy {
+    margin: 0 0 28px;
+    color: #475569;
+    line-height: 1.8;
+}
+
+.checkout-form {
+    display: grid;
+    gap: 18px;
+}
+
+.input-group {
+    display: grid;
+    gap: 8px;
+}
+
+.input-label {
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+.input-field,
+.checkout-button,
+.secondary-button,
+.order-card,
+.empty-state a {
+    font-family: inherit;
+}
+
+.input-field {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: #f9fafb;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+    background: #ffffff;
+}
+
+.checkout-button,
+.secondary-button,
+.empty-button,
+.order-card a {
+    border-radius: 14px;
+    padding: 14px 22px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.checkout-button {
+    width: fit-content;
+    background: #4338ca;
+    color: #ffffff;
+}
+
+.checkout-button:hover {
+    background: #3730a3;
+}
+
+.order-summary-card h2,
+.order-card h2 {
+    margin: 0 0 18px;
+    font-size: 1.4rem;
+}
+
+.summary-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+}
+
+.summary-item {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 14px;
+    align-items: center;
+}
+
+.summary-image {
+    width: 72px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 18px;
+    background: #f3f4f6;
+}
+
+.summary-title,
+.order-card h2 {
+    margin: 0;
+}
+
+.summary-quantity,
+.order-meta span,
+.order-meta p {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.summary-price {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.summary-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 22px;
+    border-top: 1px solid #e5e7eb;
+    font-weight: 700;
+}
+
+.order-summary-card {
+    display: grid;
+    gap: 22px;
+}
+
+.checkout-page-head {
+    margin-bottom: 28px;
+}
+
+.empty-state {
+    padding: 34px;
+    border-radius: 24px;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+
+.empty-state p {
+    margin: 0 0 18px;
+    color: #475569;
+}
+
+.empty-state a {
+    display: inline-flex;
+    background: #4338ca;
+    color: #ffffff;
+}
+
+.orders-list {
+    display: grid;
+    gap: 18px;
+}
+
+.order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+
+.order-meta {
+    display: grid;
+    gap: 10px;
+    text-align: right;
+}
+
+.order-meta span {
+    display: block;
+}
+
+.form-error,
+.field-error {
+    color: #b91c1c;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 920px) {
+    .checkout-grid,
+    .order-card {
+        grid-template-columns: 1fr;
+    }
+
+    .order-card {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .order-meta {
+        text-align: left;
+    }
+}
+
+@media (max-width: 680px) {
+    .page-shell {
+        padding: 20px 16px 32px;
+    }
+
+    .checkout-form-shell,
+    .order-summary-shell {
+        padding: 24px;
+    }
+
+    .summary-item {
+        grid-template-columns: 72px 1fr;
+    }
+}
