@@ -6,13 +6,11 @@ if (session_status() === PHP_SESSION_NONE) {
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $links = [
     ['href' => '/', 'label' => 'Home'],
-    ['href' => '/books.php', 'label' => 'Books'],
     ['href' => '/cart.php', 'label' => 'Cart'],
 ];
 
 if (!empty($_SESSION['user_id'])) {
     $links[] = ['href' => '/orders.php', 'label' => 'Orders'];
-    $links[] = ['href' => '/dashboard.php', 'label' => 'Profile'];
     $links[] = ['href' => '/logout.php', 'label' => 'Logout'];
 } else {
     $links[] = ['href' => '/login.php', 'label' => 'Login'];

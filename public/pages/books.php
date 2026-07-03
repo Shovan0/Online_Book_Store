@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Controllers\BookController;
 
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 2) . '/app/Config/config.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../app/Config/config.php';
 
 $controller = new BookController();
 $categories = $controller->getCategories();

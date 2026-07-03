@@ -10,6 +10,12 @@ require_once __DIR__ . '/../app/Config/config.php';
 $controller = new BookController();
 $featuredBooks = $controller->getFeaturedBooks();
 $latestBooks = $controller->getLatestBooks();
+$search = trim((string) ($_GET['search'] ?? ''));
+$searchResults = [];
+
+if ($search !== '') {
+    $searchResults = $controller->getBooks(['search' => $search]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +36,9 @@ $pageStyles = ['/assets/css/books.css'];
                 <h1>Find your next favorite story with curated recommendations.</h1>
                 <p>Search by author, browse categories, and explore featured books for every reader.</p>
                 <div class="hero-actions">
-                    <a class="hero-button" href="/books.php">Browse books</a>
-                    <a class="secondary-button" href="/register.php">Create account</a>
+                    <?php if (empty($_SESSION['user_id'])): ?>
+                        <a class="secondary-button" href="/register.php">Create account</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="hero-visual" aria-hidden="true">
@@ -46,63 +53,95 @@ $pageStyles = ['/assets/css/books.css'];
         </section>
 
         <section class="search-panel">
-            <form action="/books.php" method="get">
+            <form class="search-shell" action="/index.php" method="get">
                 <div class="search-row">
-                    <input class="search-input" type="search" name="search" placeholder="Search by title or author">
+                    <input class="search-input" type="search" name="search" value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Search by title or author">
                     <button class="filter-button" type="submit">Search</button>
+                    <a class="secondary-button search-clear-button" href="/index.php">Clear</a>
                 </div>
             </form>
         </section>
 
-        <section>
-            <div class="page-heading">
-                <h2>Featured books</h2>
-                <a class="secondary-button" href="/books.php">View all</a>
-            </div>
-            <div class="feature-grid">
-                <?php foreach ($featuredBooks as $book): ?>
-                    <article class="feature-card">
-                        <img class="book-cover" src="<?= htmlspecialchars($book['cover_image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?> cover">
-                        <div>
-                            <p class="detail-badge"><?= htmlspecialchars($book['category'] ?? 'Uncategorized', ENT_QUOTES, 'UTF-8'); ?></p>
-                            <h3><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <p class="book-meta">By <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'); ?></p>
-                        </div>
-                        <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
-                        <div class="feature-actions">
-                            <a class="secondary-button" href="/book.php?id=<?= (int) $book['id']; ?>">View details</a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
+        <?php if ($search !== ''): ?>
+            <section class="search-results-section">
+                <div class="search-results-header">
+                    <div>
+                        <p class="detail-badge">Search results</p>
+                        <h2>Showing matches for “<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>”</h2>
+                    </div>
+                </div>
 
-        <section style="margin-top:40px;">
-            <div class="page-heading">
-                <h2>Latest arrivals</h2>
-            </div>
-            <div class="book-grid">
-                <?php foreach ($latestBooks as $book): ?>
-                    <article class="book-card">
-                        <img class="book-cover" src="<?= htmlspecialchars($book['cover_image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?> cover">
-                        <div class="book-card-body">
-                            <p class="detail-badge"><?= htmlspecialchars($book['category'] ?? 'Uncategorized', ENT_QUOTES, 'UTF-8'); ?></p>
-                            <h3 class="book-title"><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <p class="book-meta">By <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            <div class="book-actions">
-                                <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
-                                <form class="cart-action" method="post" action="/cart.php">
-                                    <input type="hidden" name="action" value="add">
-                                    <input type="hidden" name="book_id" value="<?= (int) $book['id']; ?>">
-                                    <input type="hidden" name="quantity" value="1">
-                                    <button class="add-button" type="submit">Add to cart</button>
-                                </form>
+                <?php if (empty($searchResults['books'])): ?>
+                    <p class="book-meta">No books match "<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>".</p>
+                <?php else: ?>
+                    <div class="feature-grid search-result-grid">
+                        <?php foreach ($searchResults['books'] as $book): ?>
+                            <article class="feature-card search-result-card">
+                                <img class="book-cover search-result-cover" src="<?= htmlspecialchars($book['cover_image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?> cover">
+                                <div class="search-result-content">
+                                    <p class="detail-badge"><?= htmlspecialchars($book['category'] ?? 'Uncategorized', ENT_QUOTES, 'UTF-8'); ?></p>
+                                    <h3 class="search-result-title"><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                    <p class="book-meta">By <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                    <div class="search-result-footer">
+                                        <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
+                                        <a class="secondary-button" href="/book.php?id=<?= (int) $book['id']; ?>">View details</a>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </section>
+        <?php else: ?>
+            <section>
+                <div class="page-heading">
+                    <h2>Featured books</h2>
+                </div>
+                <div class="feature-grid">
+                    <?php foreach ($featuredBooks as $book): ?>
+                        <article class="feature-card">
+                            <img class="book-cover" src="<?= htmlspecialchars($book['cover_image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?> cover">
+                            <div>
+                                <p class="detail-badge"><?= htmlspecialchars($book['category'] ?? 'Uncategorized', ENT_QUOTES, 'UTF-8'); ?></p>
+                                <h3><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <p class="book-meta">By <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'); ?></p>
                             </div>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
+                            <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
+                            <div class="feature-actions">
+                                <a class="secondary-button" href="/book.php?id=<?= (int) $book['id']; ?>">View details</a>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+
+            <section style="margin-top:40px;">
+                <div class="page-heading">
+                    <h2>Latest arrivals</h2>
+                </div>
+                <div class="book-grid">
+                    <?php foreach ($latestBooks as $book): ?>
+                        <article class="book-card">
+                            <img class="book-cover" src="<?= htmlspecialchars($book['cover_image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?> cover">
+                            <div class="book-card-body">
+                                <p class="detail-badge"><?= htmlspecialchars($book['category'] ?? 'Uncategorized', ENT_QUOTES, 'UTF-8'); ?></p>
+                                <h3 class="book-title"><?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <p class="book-meta">By <?= htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                <div class="book-actions">
+                                    <p class="book-price">$<?= number_format((float) $book['price'], 2); ?></p>
+                                    <form class="cart-action" method="post" action="/cart.php">
+                                        <input type="hidden" name="action" value="add">
+                                        <input type="hidden" name="book_id" value="<?= (int) $book['id']; ?>">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button class="add-button" type="submit">Add to cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        <?php endif; ?>
 
         <?php include __DIR__ . '/../views/layouts/footer.php'; ?>
     </div>

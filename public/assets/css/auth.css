@@ -18,6 +18,21 @@ body {
         linear-gradient(180deg, #fbf4e8 0%, #f4e9d8 100%);
 }
 
+.auth-home-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #8f5b2b;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.auth-home-link:hover {
+    text-decoration: underline;
+}
+
 .auth-shell {
     width: min(440px, 100%);
     padding: 34px;
@@ -93,6 +108,32 @@ body {
 .input-button:hover {
     background: #7c4f24;
     transform: translateY(-1px);
+}
+
+.password-field-wrap {
+    position: relative;
+}
+
+.password-field-wrap .input-field {
+    padding-right: 78px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #8f5b2b;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 4px 8px;
+}
+
+.password-toggle:hover {
+    text-decoration: underline;
 }
 
 .form-meta {

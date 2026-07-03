@@ -155,59 +155,98 @@ body {
 }
 
 .search-panel {
-    margin-bottom: 42px;
+    margin-bottom: 26px;
     display: flex;
     justify-content: center;
 }
 
+.search-shell {
+    width: min(860px, 100%);
+}
+
 .search-row {
     display: grid;
-    grid-template-columns: 1.3fr auto;
-    gap: 16px;
-    width: min(760px, 100%);
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 12px;
     align-items: center;
-    padding: 18px;
+    padding: 14px;
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid rgba(112, 88, 61, 0.16);
-    border-radius: 22px;
-    box-shadow: 0 24px 60px rgba(46, 36, 28, 0.09);
+    border-radius: 999px;
+    box-shadow: 0 18px 44px rgba(46, 36, 28, 0.08);
 }
 
 .search-input {
     width: 100%;
-    border: 1px solid rgba(112, 88, 61, 0.12);
-    border-radius: 18px;
-    padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 14px 18px;
+    background: #fcf7ef;
     color: var(--text-strong);
     font-size: 1rem;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .search-input:focus {
     outline: none;
-    border-color: rgba(143, 91, 43, 0.45);
-    box-shadow: 0 0 0 5px rgba(201, 155, 103, 0.14);
+    border-color: rgba(143, 91, 43, 0.35);
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(201, 155, 103, 0.16);
 }
 
 .search-input::placeholder {
     color: #a88c70;
 }
 
+.filter-button,
+.search-clear-button {
+    min-width: 110px;
+    height: 48px;
+    border: none;
+    border-radius: 999px;
+    padding: 0 18px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
 .filter-button {
-    min-width: 150px;
     background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: #ffffff;
-    border: none;
-    border-radius: 18px;
-    padding: 16px 22px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    box-shadow: 0 14px 24px rgba(143, 91, 43, 0.2);
+    box-shadow: 0 12px 24px rgba(143, 91, 43, 0.2);
 }
 
 .filter-button:hover {
     background: linear-gradient(135deg, var(--primary-hover), #6f4420);
+}
+
+.search-clear-button {
+    background: rgba(143, 91, 43, 0.09);
+    color: var(--primary);
+}
+
+.search-clear-button:hover {
+    background: rgba(143, 91, 43, 0.16);
+}
+
+.search-results-section {
+    margin-top: 8px;
+}
+
+.search-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.search-results-header h2 {
+    margin: 6px 0 0;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
 }
 
 .feature-grid {
@@ -230,6 +269,57 @@ body {
 .feature-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 30px 72px rgba(46, 36, 28, 0.12);
+}
+
+.search-result-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.search-result-card {
+    min-height: 260px;
+    padding: 24px;
+    gap: 14px;
+    box-shadow: 0 18px 44px rgba(46, 36, 28, 0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(112, 88, 61, 0.14);
+}
+
+.search-result-cover {
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.search-result-content {
+    display: grid;
+    gap: 14px;
+}
+
+.search-result-title {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.search-result-footer {
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.search-result-footer .book-price {
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.search-result-footer .secondary-button {
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-size: 0.95rem;
 }
 
 .feature-card h3 {
@@ -456,6 +546,18 @@ body {
 
     .search-row {
         grid-template-columns: 1fr;
+        border-radius: 24px;
+    }
+
+    .filter-button,
+    .search-clear-button {
+        width: 100%;
+    }
+
+    .search-results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 }
 
@@ -467,6 +569,10 @@ body {
     .feature-card,
     .book-card {
         border-radius: 20px;
+    }
+
+    .search-result-grid {
+        grid-template-columns: 1fr;
     }
 }
 

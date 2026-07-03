@@ -73,7 +73,7 @@ $pageStyles = ['/assets/css/cart.css'];
         <?php if (empty($items)): ?>
             <div class="empty-state">
                 <p>Your cart is empty right now.</p>
-                <a href="/books.php">Browse books</a>
+                <a href="/">Browse books</a>
             </div>
         <?php else: ?>
             <table class="cart-table">

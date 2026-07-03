@@ -41,6 +41,7 @@ $pageStyles = ['/assets/css/auth.css'];
 <?php include dirname(__DIR__, 2) . '/views/layouts/head.php'; ?>
 <body>
     <?php include dirname(__DIR__, 2) . '/views/layouts/flash.php'; ?>
+    <a class="auth-home-link" href="/index.php">Online Book Store</a>
     <main class="auth-shell">
         <header class="auth-header">
             <h1 class="auth-title">Welcome back</h1>
@@ -58,7 +59,10 @@ $pageStyles = ['/assets/css/auth.css'];
 
             <div class="input-group">
                 <label class="input-label" for="password">Password</label>
-                <input class="input-field" type="password" id="password" name="password" required>
+                <div class="password-field-wrap">
+                    <input class="input-field" type="password" id="password" name="password" required>
+                    <button class="password-toggle" type="button" data-target="password">Show</button>
+                </div>
                 <?php if (!empty($errors['password'])): ?>
                     <div class="field-error"><?= htmlspecialchars($errors['password'], ENT_QUOTES, 'UTF-8'); ?></div>
                 <?php endif; ?>
@@ -74,5 +78,20 @@ $pageStyles = ['/assets/css/auth.css'];
         <p class="auth-footer">Don’t have an account? <a class="form-link" href="register.php">Register</a>.</p>
     </main>
     <?php include dirname(__DIR__, 2) . '/views/layouts/scripts.php'; ?>
+    <script>
+        document.querySelectorAll('.password-toggle').forEach((button) => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                if (!input) {
+                    return;
+                }
+
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                button.textContent = isPassword ? 'Hide' : 'Show';
+            });
+        });
+    </script>
 </body>
 </html>
